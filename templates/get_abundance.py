@@ -20,6 +20,7 @@ def get_taxname(tax_id,tax_level):
     complete_tax = requests.get(path).text
 
     #Checks for API correct response (field containing the tax name). Thanks to devinbrown from Github
+    #Actually this doesn't totally do the trick. Probably because of empty entries. -- Imago_XV
     try:
         name = json.loads(complete_tax)[0][tax_level_tag]
     except:

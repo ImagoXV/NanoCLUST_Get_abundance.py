@@ -15,7 +15,10 @@ def get_taxname(tax_id,tax_level):
     #Avoids pipeline crash due to "nan" classification output. Thanks to Qi-Maria from Github
     if str(tax_id) == "nan":
         tax_id = 1
-    
+        #First try to avoid pipeline crash in case of empty classification output -- Imago_XV
+    if str(tax_id) == "":
+        tax_id = 1
+        
     path = 'http://api.unipept.ugent.be/api/v1/taxonomy.json?input[]=' + str(int(tax_id)) + '&extra=true&names=true'
     complete_tax = requests.get(path).text
 
